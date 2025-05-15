@@ -41,4 +41,20 @@ public class PostController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
+        return postRepository.findById(id)
+                .map(post -> {
+                    post.setTitle(updatedPost.getTitle());
+                    post.setContent(updatedPost.getContent());
+                    post.setImageUrl(updatedPost.getImageUrl());
+                    post.setAuthor(updatedPost.getAuthor());
+                    // update other fields if any
+                    Post savedPost = postRepository.save(post);
+                    return ResponseEntity.ok(savedPost);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 }

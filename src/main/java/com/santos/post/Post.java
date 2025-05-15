@@ -12,6 +12,9 @@ public class Post {
     private Long id;
 
     @Column(nullable = false)
+    private String title;  // <-- Added title
+
+    @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)
@@ -29,7 +32,8 @@ public class Post {
     // Constructors
     public Post() {}
 
-    public Post(String content, String imageUrl, String author) {
+    public Post(String title, String content, String imageUrl, String author) {
+        this.title = title; // initialize title
         this.content = content;
         this.imageUrl = imageUrl;
         this.author = author;
@@ -38,12 +42,21 @@ public class Post {
     }
 
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {       // getter for title
+        return title;
+    }
+
+    public void setTitle(String title) {  // setter for title
+        this.title = title;
     }
 
     public String getContent() {
